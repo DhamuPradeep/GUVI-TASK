@@ -24,7 +24,7 @@ if(isset($email) !== null && isset($password) !==null && isset($firstName) != nu
         die(0);
     }else{
         $stmt->close();
-        $stmt=$con->prepare("INSERT Into users(firstName,lastName,gender,email,password,phonenumber) values(?,?,?,?,?)");
+        $stmt=$con->prepare("INSERT Into users(firstName,lastName,email,password,phonenumber) values(?,?,?,?,?)");
         $stmt->bind_param("sssss",$firstName,$lastName,$email,$password,$phonenumber);
         $stmt->execute();
         echo "User Details Added Successfully";
