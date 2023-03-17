@@ -28,8 +28,12 @@ $(document).ready(function() {
     password: password
     },
     cache: false,
-    success: function(data) {
-    alert(data);
+    success: function(response) {
+      if(response==="User Details Added Successfully"){
+        window.location.href = 'login.html';
+      }else{
+        alert('Could not able to add your details');
+      }
     },
     error: function(xhr, status, error) {
     console.error(xhr);
