@@ -7,13 +7,13 @@ $password = $_POST['password'];
 
 $con = mysqli_connect("localhost","root","","guvi");
 
-if (!$con){
+if(mysqli_connect_error()){
     die(0);
 }
 
 if(isset($email) !== null && isset($password) !==null && isset($firstName) != null && isset($lastName) && isset($phonenumber)){
     
-    $stmt=$con->prepare("SELECT email From users Where email='$email'  Limit 1");
+    $stmt=$con->prepare("SELECT email FROM users WHERE email = ? Limit 1 ");
     $stmt->bind_param("s",$email);
     $stmt->execute();
     $stmt->bind_result($email);
@@ -24,8 +24,8 @@ if(isset($email) !== null && isset($password) !==null && isset($firstName) != nu
         die(0);
     }else{
         $stmt->close();
-        $stmt=$con->prepare("INSERT Into users(firstName,lastName,email,password,phonenumber) values(?,?,?,?,?)");
-        $stmt->bind_param("sssss",$firstName,$lastName,$email,$password,$phonenumber);
+        $stmt=$con->prepare("INSERT Into users(firstname,lastname,email,phonenumber,password) values(?,?,?,?,?)");
+        $stmt->bind_param("sssss",$firstName,$lastName,$email,$phonenumber,$password);
         $stmt->execute();
         echo "User Details Added Successfully";
     }
