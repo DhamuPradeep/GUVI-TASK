@@ -1,6 +1,7 @@
 $(document).ready(function() {
  
-    $("#loginsubmit").click(function() {
+    $("#loginsubmit").click(function(e) {
+    e.preventDefault();
     var email = $("#email").val();
     var password = $("#password").val();
     
@@ -8,7 +9,7 @@ $(document).ready(function() {
         alert("Please fill all fields.");
         return false;
     }
-    
+
     $.ajax({
     type: "POST",
     url: "php/login.php",
@@ -17,7 +18,7 @@ $(document).ready(function() {
     password: password
     },
     cache: false,
-    success: function(data) {
+    success: function(response) {
         if(response == 'success') {
             window.location.href = 'profile.html';
         } else {
