@@ -21,9 +21,13 @@ if(isset($email) !== null && isset($password) !==null){
     $stmt->close();
     $con->close();
     if ($rows==1) {
-        echo 'success';
+        $message = "success";
+        $response = array("usermail" => $email,"message"=>$message);
+        echo json_encode($response);
     } else {
-        echo "Login failed";
+        $message = "Login Failed";
+        $response = array("message"=>$message);
+        echo json_encode($response);
     }
 }
 else{
