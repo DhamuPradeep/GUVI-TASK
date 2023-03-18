@@ -10,7 +10,7 @@ $con =  mysqli_connect($hostname,$username,$userpassword,$dbname);
 if(mysqli_connect_error()){
     die(0);
 }
-
+$redis = new Redis();
 if(isset($email) !== null && isset($password) !==null){
     
     $stmt = $con->prepare("SELECT * FROM users WHERE email=(?)and password=(?)");
